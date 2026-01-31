@@ -1,6 +1,6 @@
 # Time Series Segmentation Experiments (tsseg-exp)
 
-Experiment harness for the [`tsseg`](https://github.com/fchavelli/tsseg) library. It provides reproducible pipelines, MLflow logging, and Hydra-driven configuration for time-series segmentation research.
+Experiment harness for the `tsseg` library. It provides reproducible pipelines, MLflow logging, and Hydra-driven configuration for time-series segmentation research.
 
 ## Features
 - Hydra configuration tree for datasets, algorithms, metrics, and launchers.
@@ -121,7 +121,7 @@ python src/tsseg_exp/main.py experiment=grid_unsupervised hydra/launcher=submiti
 The tuning pipeline splits trials into train/test partitions and performs a metric-driven search. This is often handled by `experiment=grid_supervised` or `experiment=grid_unsupervised` depending on the goal, but can be invoked manually:
 
 ```bash
-python src/tsseg_exp/main.py +pipeline=tuning tuning.train_fraction=0.7 tuning.random_state=17
+python src/tsseg_exp/main.py +pipeline=tuning tuning.train_fraction=0.7
 ```
 
 ## Analysis and Benchmarking

@@ -11,9 +11,6 @@ defaults:
   - override hydra/sweeper: basic
   - override hydra/launcher: basic # Change for submitit_slurm  on server / basic for local runs
 
-# mlflow:
-#   tracking_uri: ${oc.env:MLFLOW_TRACKING_URI, "http://cleps:15050"}
-
 # Default configuration for Hydra
 hydra:
   run:
@@ -21,6 +18,3 @@ hydra:
   sweep:
     dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
     subdir: ${hydra.job.num}
-  # job:
-  #   env_set:
-  #     MLFLOW_TRACKING_URI: http://cleps:15050

@@ -11,4 +11,3 @@ setup:
   - "export SLURM_CPU_BIND=none"
   - "export OMP_NUM_THREADS=8"
   - "export MKL_NUM_THREADS=8"
-  # - "export MLFLOW_TRACKING_URI='http://cleps:15050'"
