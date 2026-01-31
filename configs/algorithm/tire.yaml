@@ -1,0 +1,32 @@
+name: tire
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.tire.detector.TireDetector
+
+  window_size: 20 # should be set using autocorrelation / FFT
+  stride: 1
+  domain: "both"
+  intermediate_dim_td: 0
+  latent_dim_td: 1
+  nr_shared_td: 1
+  nr_ae_td: 3
+  loss_weight_td: 1.0
+  intermediate_dim_fd: 10
+  latent_dim_fd: 1
+  nr_shared_fd: 1
+  nr_ae_fd: 3
+  loss_weight_fd: 1.0
+  nfft: 30
+  norm_mode: "timeseries"
+  peak_distance_fraction: 0.01
+  max_epochs: 20 # should be tuned
+  patience: 5
+  learning_rate: 0.001
+  n_segments: null
+  axis: 0
+  random_state: 0
+
+tunable_parameters:
+  - window_size: [10, 20, 50]
+  - max_epochs: [20, 50]

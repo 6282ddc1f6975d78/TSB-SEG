@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tsseg-exp"
+version = "0.1.0"
+description = "Experiments for the tsseg library"
+authors = [
+  { name="Your Name", email="your.email@example.com" },
+]
+requires-python = ">=3.10"
+dependencies = [
+    # "tsseg",  # Managed manually/via conda
+    "hydra-core",
+    "mlflow",
+    "hydra-optuna-sweeper",
+    "omegaconf",
+    "aeon",
+    "numpy",
+    "matplotlib",
+    "hydra-submitit-launcher",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "ruff",
+    "rich"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

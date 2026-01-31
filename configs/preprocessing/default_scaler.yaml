@@ -1,0 +1,2 @@
+# configs/preprocessing/default_scaler.yaml
+_target_: aeon.transformations.collection.scale.Normalizer

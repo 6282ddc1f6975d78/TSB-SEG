@@ -1,0 +1,16 @@
+name: fluss
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.fluss.detector.FLUSSDetector
+
+  window_size: 10 # can use autocorrelation/FFT for periodic data
+  n_segments: 5
+  exclusion_factor: 5
+  multivariate_strategy: "ensembling"
+  tolerance: 0.01
+
+tunable_parameters:
+  - window_size: [10, 20, 50]
+  #- n_segments: [3, 5, 10]
+  - multivariate_strategy: ["ensembling", "l2"]

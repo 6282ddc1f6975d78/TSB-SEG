@@ -1,0 +1,11 @@
+name: igts
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.igts.detector.InformationGainDetector
+
+  k_max: 10         # Overriden by GT n_cps in semi_supervised mode.
+  step: 5
+
+tunable_parameters:
+  - step: [1, 5, 10]

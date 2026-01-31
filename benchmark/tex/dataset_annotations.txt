@@ -1,0 +1,19 @@
+HAS:
+- Example-ID: 134
+- States: resting, performing squats, resting, loosening legs, resting
+- Context: human activity recording showing Y-axis acceleration measurements of different motions from a 30-year-old female
+
+SKAB:
+- Example-ID: 12
+- States: open valve, closed valve, open valve
+- Context: water circuit, fluid circulation flow with opened and closed valve
+
+TSSB
+- Example-ID: 20
+- States: normal heartbeat, myocardial infarction
+- Context: https://timeseriesclassification.com/description.php?Dataset=ECG200
+
+UTSA
+- Example-ID: 2
+- States: normal EEG, spike-wave discharges
+- Context: EEG recording at left and right frontal cortex of male adult WAG/Rij rats. Signals were referenced to an electrode placed at the cerebelum, they were filtered between 1-100 Hz and digitized at 200 Hz

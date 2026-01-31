@@ -1,0 +1,20 @@
+name: kcpd
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.kcpd.detector.KCPDDetector
+
+  n_cps: null         # Inferred in unsupervised setting
+  pen: 10.0           # Overriden by None if n_cps is not None
+  kernel: "linear"    # Default from ruptures package
+  min_size: 2         # Default from ruptures package
+  jump: 5             # Default from ruptures package
+  cost_params: null
+
+tunable_parameters:
+  - kernel: ["linear", "cosine", "rbf"]
+  - jump: [2, 3, 5]
+  - pen: [10.0, 100.0]
+
+
+# covering_score': 0.40405955528603366

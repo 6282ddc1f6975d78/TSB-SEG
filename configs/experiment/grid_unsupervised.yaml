@@ -1,0 +1,6 @@
+# @package _global_
+name: "tsseg-experiment-grid-unsupervised-29-01"
+timeout_seconds: 86400    # 24 hours
+supervision_mode: "unsupervised"
+pipeline:
+  name: grid

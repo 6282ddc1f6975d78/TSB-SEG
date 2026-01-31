@@ -1,0 +1,13 @@
+# @package _global_
+
+# defaults:
+#   - /experiment: state_evaluation
+
+pipeline:
+  name: clustering
+
+algorithm:
+  clustering:
+    _target_: tsseg_exp.algorithms.cp_state_estimator.ChangePointToStateEstimator
+    n_clusters: "auto"
+    metric: "dtw" # or "euclidean", "softdtw"

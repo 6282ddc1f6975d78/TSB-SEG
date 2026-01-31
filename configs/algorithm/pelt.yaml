@@ -1,0 +1,24 @@
+name: pelt
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.pelt.detector.PeltDetector
+
+  model: "l2"
+  min_size: 2
+  jump: 5
+  penalty: 10
+  cost_params: null
+
+# Note:
+# We follow the default parameters from aeon package for other rupture algorithm.
+# win_size = 2, jump = 5. We define penalty = 10 for all rupture algorithms.
+# https://centre-borelli.github.io/ruptures-docs/user-guide/detection/pelt/
+
+tunable_parameters:
+  - model: ["l1", "l2", "rbf"]
+  - jump: [2, 3, 5]
+  - penalty: [10.0, 100.0]
+
+# 'covering_score': 0.2400396525177277 'f1_score_score': 0.04317192605361747
+# covering_score': 0.40405955528603366

@@ -1,0 +1,24 @@
+# @package _global_
+
+defaults:
+  - override /pipeline: clustering
+
+experiment:
+  name: "eval-state-semi-supervised"
+  description: "State Evaluation of Semi-Supervised Change Point Detection runs"
+  task: state_detection
+  
+  # ID of the experiment containing the Change Point Detection runs (e.g. 11)
+  source_experiment_id: 11 
+  
+  # Filter only for semi-supervised runs in the source experiment
+  # Adjust the tag key/value if your specific run logging differs
+  source_run_filter: "tags.supervision_mode = 'semi_supervised'"
+  
+  target_algorithms: "all"
+  # # Use environment variable if present (Cluster), else fallback to code default (Local SQLite)
+  # tracking_uri: "${oc.env:MLFLOW_TRACKING_URI, ''}"
+
+algorithm:
+  n_clusters: "auto" # Use Ground Truth K
+  metric: "dtw"      # or "euclidean" for simpler/faster baseline

@@ -1,0 +1,14 @@
+# configs/hydra/launcher/submitit_slurm.yaml
+
+# @package hydra.launcher
+partition: cpu_homogen
+
+timeout_min: 1440
+cpus_per_task: 8
+mem_gb: 32
+
+setup:
+  - "export SLURM_CPU_BIND=none"
+  - "export OMP_NUM_THREADS=8"
+  - "export MKL_NUM_THREADS=8"
+  # - "export MLFLOW_TRACKING_URI='http://cleps:15050'"

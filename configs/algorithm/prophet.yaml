@@ -1,0 +1,13 @@
+name: prophet
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.prophet.detector.ProphetDetector
+
+  n_changepoints: 6
+  n_changepoint_func: null
+  multivariate_strategy: "ensembling"
+
+tunable_parameters:
+  - n_changepoints: [6, 10, 20]
+  - multivariate_strategy: ["ensembling", "l2"]

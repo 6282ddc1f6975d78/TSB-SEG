@@ -1,0 +1,19 @@
+name: tglad
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.tglad.detector.TGLADDetector
+
+  window_size: 128 # should be set using MWF (see paper)
+  stride: 128 # should depend on window size
+  batch_size: 8
+  threshold: 0.5 # should be tuned
+  min_spacing: null
+  epochs: 2000 # should be tuned
+  learning_rate: 0.001
+  glad_iterations: 5 # should be tuned
+  eval_offset: 0.1
+
+tunable_parameters:
+  - window_size: [64, 128, 256]
+  - threshold: [0.3, 0.5, 0.7]

@@ -1,0 +1,3 @@
+name: "tsseg-experiment-unsupervised-27-01"
+timeout_seconds: 86400    # 24 hours
+supervision_mode: "unsupervised"

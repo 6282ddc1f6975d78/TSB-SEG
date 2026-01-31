@@ -1,0 +1,8 @@
+name: needle-passing
+modality: multivariate
+periodic: False
+
+loader:
+  _target_: tsseg_exp.datasets.loaders.load_dataset
+  dataset_name: needle-passing
+  return_X_y: True

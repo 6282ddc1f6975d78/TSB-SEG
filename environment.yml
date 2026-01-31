@@ -1,0 +1,19 @@
+name: tsseg-env
+channels:
+  - conda-forge
+dependencies:
+  # Core dependencies for tsseg-exp
+  - python=3.12
+  - pip
+  - hydra-core
+  - mlflow
+  - tqdm
+  - joblib
+  - aeon
+  - tslearn
+  - pytorch
+  - hydra-submitit-launcher
+  - pip:
+    # Install tsseg-exp itself
+    - hydra-optuna-sweeper
+    - -e .

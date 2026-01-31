@@ -1,0 +1,18 @@
+name: vsax
+task: state
+
+instance:
+  _target_: tsseg.algorithms.vsax.detector.VSAXDetector
+
+  alphabet_size: 6
+  paa_segments: 8
+  min_segment_length: 20
+  max_segment_length: 180
+  num_lengths: 6
+  penalty: 0.8
+  zscore: true
+
+tunable_parameters:
+  - alphabet_size: [4, 6, 8]
+  - paa_segments: [4, 8, 12]
+  - penalty: [0.2, 0.6, 1.0]

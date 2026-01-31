@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage[landscape, margin=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\begin{document}
+\section*{Dataset Gallery}
+\begin{longtable}{l c c c c c m{8cm}}
+\toprule
+\textbf{Dataset} & \textbf{\#} & \textbf{Length} & \textbf{D} & \textbf{K} & \textbf{CPs} & \textbf{Example Series} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Dataset} & \textbf{\#} & \textbf{Length} & \textbf{D} & \textbf{K} & \textbf{CPs} & \textbf{Example Series} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+actrectut & 2 & 31.4-32.6k & 10 & 6 & 42 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/actrectut.png} \\
+has & 250 & 0.3-41.5k & 6-9 & 1-12 & 0-14 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/has.png} \\
+mocap & 9 & 4.6-10.6k & 4 & 3-9 & 5-10 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/mocap.png} \\
+pamap2 & 9 & 8.5-447.0k & 9 & 2-13 & 2-27 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/pamap2.png} \\
+skab & 34 & 0.7-1.3k & 8 & 2 & 1-2 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/skab.png} \\
+tssb & 75 & 0.2-20.7k & 1 & 1-7 & 0-8 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/tssb.png} \\
+usc-had & 70 & 25.4-56.3k & 6 & 12 & 11 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/usc-had.png} \\
+utsa & 32 & 2.0-40.0k & 1 & 2-3 & 1-2 & \includegraphics[width=8cm, height=0.7cm, keepaspectratio=false]{figures/utsa.png} \\
+\end{longtable}
+\end{document}

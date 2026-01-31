@@ -1,0 +1,50 @@
+# MLflow Benchmark Configuration
+
+# Groups of experiments for analysis modes
+groups:
+  default: 
+    - unsupervised
+  guided: 
+    - semi_supervised
+  grid_default: 
+    - grid_unsupervised
+  grid_guided: 
+    - grid_supervised
+
+# Mapping from logical keys to actual MLflow experiment names
+# If the name contains a wildcard *, we will match against available experiments
+experiments:
+  unsupervised: "tsseg-experiment-unsupervised-*"
+  semi_supervised: "tsseg-experiment-supervised-*"
+  grid_unsupervised: "tsseg-experiment-grid-unsupervised-*"
+  grid_supervised: "tsseg-experiment-grid-supervised-*"
+
+# Aliases for standardizing DataFrame columns
+# The manager will look for these columns in order and coalesce them into the key
+aliases:
+  algorithm: 
+    - "params.algorithm_name"
+    - "params.algorithm"
+    - "tags.algorithm_name"
+    - "tags.algorithm"
+  dataset: 
+    - "params.dataset_name"
+    - "params.dataset"
+    - "tags.dataset_name"
+    - "tags.dataset"
+  error_message:
+    - "tags.error_message"
+    - "params.error_message"
+  parent_run_id:
+    - "tags.mlflow.parentRunId"
+  run_name:
+    - "tags.mlflow.runName"
+
+# Core columns to always keep in the final dataframe
+base_columns:
+  - run_id
+  - experiment_id
+  - status
+  - start_time
+  - end_time
+  - artifact_uri

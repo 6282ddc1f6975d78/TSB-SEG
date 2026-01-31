@@ -1,0 +1,15 @@
+name: dynp
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.dynp.detector.DynpDetector
+
+  n_cps: null # Mandatory for Dynp. Overriden by ground truth as a semi_supervised algorithm.
+  model: "l2"
+  min_size: 2
+  jump: 5
+  cost_params: null
+
+tunable_parameters:
+  - model: ["l1", "l2", "rbf"]
+  - jump: [2, 3, 5]

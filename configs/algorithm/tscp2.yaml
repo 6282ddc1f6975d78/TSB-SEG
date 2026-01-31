@@ -1,0 +1,32 @@
+name: tscp2
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.tscp2.detector.TSCP2Detector
+
+  window_size: 128
+  n_cps: null       # Overriden by ground truth when semi_supervised.
+  similarity_threshold: 0.1
+  stride: 5
+  code_size: 32
+  nb_filters: 64
+  kernel_size: 4
+  dilations: null
+  nb_stacks: 2
+  dropout_rate: 0.0
+  dense_units: null
+  batch_size: 64
+  epochs: 50
+  learning_rate: 1e-3
+  loss: "nce"
+  temperature: 0.1
+  tau: 0.1
+  beta: 0.1
+  similarity: "cosine"
+  refit_on_predict: False
+  axis: 0
+
+tunable_parameters:
+  - window_size: [64, 128, 256] # Issue when TS length < 2 * window_size (e.g. TSSB TS number 8 - "Chinatown")
+  - similarity_threshold: [0.05, 0.1, 0.5]
+  - learning_rate: [1e-4, 1e-3, 1e-2]

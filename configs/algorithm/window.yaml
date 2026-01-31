@@ -1,0 +1,19 @@
+name: window
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.window.detector.WindowDetector
+
+  width: 100      # Default from ruptures package
+  n_cps: null
+  pen: 10.0
+  epsilon: null
+  model: "l2"     # Default from ruptures package
+  min_size: 2     # Default from ruptures package
+  jump: 5         # Default from ruptures package
+  cost_params: null
+
+tunable_parameters:
+  - model: ["l1", "l2", "rbf"]
+  - jump: [2, 3, 5]
+  - pen: [10.0, 100.0]

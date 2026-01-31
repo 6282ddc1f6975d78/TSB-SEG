@@ -1,0 +1,21 @@
+name: binseg
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.binseg.detector.BinSegDetector
+
+  n_cps: null
+  model: "l2"
+  min_size: 2
+  jump: 5
+  penalty: 10       # Switches to None if n_cps is not None
+  epsilon: null
+  custom_cost: null
+  cost_params: null
+
+tunable_parameters:
+  - model: ["l1", "l2", "rbf"]
+  - penalty: [10, 100]
+
+#'f1_score_score': 0.032527596779473394, 'covering_score': 0.33578480527411264
+# 'covering_score': 0.4010319773672238
