@@ -7,6 +7,12 @@ This repository contains two subprojects related to time-series segmentation, pr
 
 Follow detailed guidelines from `tsseg/` and `tsseg-exp/` respective `README` files for installation and usage.
 
+## Usage
+
+```bash
+git clone https://github.com/6282ddc1f6975d78/TSB-SEG.git
+```
+
 ## Data
 
 The data folder is located in the `tsseg-exp/data/` folder in a `data.zip` file (~1Go) that you want to unzip first.
