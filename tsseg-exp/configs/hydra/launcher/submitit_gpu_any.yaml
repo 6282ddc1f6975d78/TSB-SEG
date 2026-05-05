@@ -1,0 +1,39 @@
+# configs/hydra/launcher/submitit_gpu_any.yaml
+# ── SLURM launcher: any available GPU (>= 24 GB VRAM) ─────────────────
+# Uses OR-constraint to target any node with a viable GPU, avoiding
+# long queue waits when specific GPU types are saturated.
+#
+# Eligible GPUs (by preference, but SLURM picks whatever is free):
+#   H200 (96GB) > H100 (96GB) > A100 (80GB) > RTX8000 (48GB) >
+#   V100 (32GB) > RTX6000 (24GB)
+#
+# Excluded: GTX1080Ti (12GB), RTX2080Ti (12GB) — too little VRAM for FM.
+#
+# cpus_per_task=8 and mem_gb=40 are set to the lowest common denominator
+# (V100 node: 8 cpus/gpu, 192GB / 2 gpus = 96GB).
+#
+# Usage:
+#   python src/tsseg_exp/main.py hydra/launcher=submitit_gpu_any ...
+
+# @package hydra.launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 2880              # 2 days (gpu partition max)
+cpus_per_task: 8
+gpus_per_node: 1
+tasks_per_node: 1
+mem_gb: 40
+nodes: 1
+name: ${hydra.job.name}
+stderr_to_stdout: false
+
+partition: gpu
+signal_delay_s: 120
+max_num_timeout: 0
+additional_parameters:
+  constraint: "h200|h100|a100|rtx8000|v100|rtx6000"
+array_parallelism: 256
+
+setup:
+  - "export SLURM_CPU_BIND=none"

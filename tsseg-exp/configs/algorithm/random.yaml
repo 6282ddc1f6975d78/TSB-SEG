@@ -1,0 +1,13 @@
+name: random
+task: state
+
+instance:
+  _target_: tsseg.algorithms.random.detector.RandomDetector
+
+  n_change_points: null     # auto filled with semi_supervised True
+  n_states: null            # auto filled with semi_supervised True
+  random_state: 0
+
+# Note:
+# Set semi_supervised to true to enable the model to use known number of states and change points during detection.
+# To use the model in a fully unsupervised manner, set semi_supervised to false.

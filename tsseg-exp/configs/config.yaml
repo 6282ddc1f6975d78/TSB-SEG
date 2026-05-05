@@ -1,0 +1,30 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - pipeline: default              # Comment to debug
+  - experiment: unsupervised
+  - algorithm: time2state
+  - dataset: mocap
+  - metric: default
+  - preprocessing: default
+  - override hydra/sweeper: basic
+  - override hydra/launcher: basic # Change for slurm on server / basic for local runs
+
+# ── MLflow ────────────────────────────────────────────────────────────
+# Tracking is configured via environment variables (see .env.example):
+#   MLFLOW_TRACKING_URI   — explicit URI  (http://... or sqlite:///...)
+#   TSSEG_MLFLOW_DIR      — auto-discover server from mlflow_node.txt
+# If neither is set, MLflow defaults to local ./mlruns/ file store.
+
+# Default configuration for Hydra
+# NOTE: outputs/ and multirun/ are written inside the active workspace.
+# The workspace root is resolved at runtime by the experiment scripts.
+# For local runs, set TSSEG_WORKSPACE (e.g. local/dev) and the pipeline
+# will override hydra.run.dir / hydra.sweep.dir accordingly.
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

@@ -1,0 +1,22 @@
+name: changefinder
+task: change_point
+
+instance:
+  _target_: tsseg.algorithms.changefinder.detector.ChangeFinderDetector
+
+  order: 5
+  discount: 0.005
+  smooth_window: 7
+  score: "logarithmic"
+  n_cps: null
+  threshold: null
+  min_distance: 10
+  multivariate_strategy: "l2"
+  tolerance: 0
+  axis: 0
+
+tunable_parameters:
+  - order: [3, 5, 10]
+  - discount: [0.005, 0.01, 0.05]
+  - smooth_window: [5, 7, 15]
+  - multivariate_strategy: ["l2", "ensembling"]

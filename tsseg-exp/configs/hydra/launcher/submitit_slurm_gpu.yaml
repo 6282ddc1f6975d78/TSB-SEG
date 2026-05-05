@@ -1,0 +1,31 @@
+# configs/hydra/launcher/submitit_slurm_gpu.yaml
+# ── SLURM launcher with GPU for TiRex experiments ─────────────────────
+#
+# Usage:
+#   python src/tsseg_exp/main.py hydra/launcher=submitit_slurm_gpu ...
+
+# @package hydra.launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+
+# ── BaseQueueConf defaults ─────────────────────
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 1440
+cpus_per_task: 8
+gpus_per_node: 1
+tasks_per_node: 1
+mem_gb: 48
+nodes: 1
+name: ${hydra.job.name}
+stderr_to_stdout: false
+
+# ── Slurm-specific ─────────────────────────────
+partition: gpu
+signal_delay_s: 120
+max_num_timeout: 0
+additional_parameters: {}
+array_parallelism: 256
+
+setup:
+  - "export SLURM_CPU_BIND=none"
+  - "export OMP_NUM_THREADS=8"
+  - "export MKL_NUM_THREADS=8"

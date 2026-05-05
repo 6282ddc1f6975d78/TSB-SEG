@@ -1,0 +1,55 @@
+# ──────────────────────────────────────────────────────────────────────
+# MLflow Benchmark Configuration
+# ──────────────────────────────────────────────────────────────────────
+# Single source of truth for experiment mapping, grouping, and
+# expected dataset sizes.  Used by mlflow_manager.py and
+# benchmark_analysis.py.
+
+# ── Experiment name mapping ──────────────────────────────────────────
+# Logical key → actual MLflow experiment name.
+# Wildcards (*) are supported and matched against the DB.
+experiments:
+  unsupervised:      "tsseg-experiment-unsupervised-09-02"
+  semi_supervised:   "tsseg-experiment-supervised-09-02"
+  grid_unsupervised: "tsseg-experiment-grid-unsupervised-29-01"
+  grid_supervised:   "tsseg-experiment-grid-supervised-29-01"
+
+# ── Groups ───────────────────────────────────────────────────────────
+# Each group maps to one or more logical keys above.
+# Used for mode assignment and analysis filtering.
+groups:
+  default:
+    - unsupervised
+  guided:
+    - semi_supervised
+  grid_default:
+    - grid_unsupervised
+  grid_guided:
+    - grid_supervised
+
+# ── Expected series counts per dataset ───────────────────────────────
+# Used by BenchmarkAnalyzer.validate_completeness() to decide
+# whether a parent run is "complete".
+expected_series:
+  actrectut: 2
+  has: 250
+  mocap: 9
+  pamap2: 9
+  skab: 34
+  tssb: 75
+  usc-had: 70
+  utsa: 32
+  pump: 120
+
+# ── Algorithm filters ────────────────────────────────────────────────
+# blacklisted_algos: excluded from all analysis (fundamentally broken).
+blacklisted_algos:
+  - vsax
+
+# partial_algos: kept even when incomplete (don't finish all datasets)
+# because they are interesting for state detection despite limited
+# coverage.  They are flagged with is_partial=True in the output.
+partial_algos:
+  - hdp-hsmm
+  - hdp-hsmm-legacy
+  - ticc

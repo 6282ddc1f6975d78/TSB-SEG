@@ -1,0 +1,65 @@
+{
+  "categories": {
+    "CPD / Subsequence-based": {
+      "task": "CPD",
+      "subtype": "Subsequence-based",
+      "hue_range": "blues",
+      "algorithms": ["clasp", "espresso", "fluss", "igts", "tglad", "tire", "tscp2"]
+    },
+    "CPD / Distribution-based": {
+      "task": "CPD",
+      "subtype": "Distribution-based",
+      "hue_range": "greens",
+      "algorithms": ["amoc", "binseg", "bocd", "bottomup", "dynp", "eagglo", "ggs", "icid", "kcpd", "pelt", "prophet", "window"]
+    },
+    "SD / Integrated": {
+      "task": "SD",
+      "subtype": "Integrated",
+      "hue_range": "oranges",
+      "algorithms": ["autoplait", "hdp-hsmm", "hidalgo"]
+    },
+    "SD / Decomposed": {
+      "task": "SD",
+      "subtype": "Decomposed",
+      "hue_range": "purples",
+      "algorithms": ["clap", "e2usd", "ticc", "time2state"]
+    }
+  },
+  "algorithms": {
+    "amoc":       {"display": "AMOC",           "task": "CPD", "subtype": "Distribution-based", "color": "#006d2c"},
+    "binseg":     {"display": "BinSeg",         "task": "CPD", "subtype": "Distribution-based", "color": "#1a9850"},
+    "bocd":       {"display": "BOCD",           "task": "CPD", "subtype": "Distribution-based", "color": "#41ab5d"},
+    "bottomup":   {"display": "BottomUp",       "task": "CPD", "subtype": "Distribution-based", "color": "#31a354"},
+    "dynp":       {"display": "DynP",           "task": "CPD", "subtype": "Distribution-based", "color": "#238b45"},
+    "eagglo":     {"display": "EAgglo",         "task": "CPD", "subtype": "Distribution-based", "color": "#78c679"},
+    "icid":       {"display": "ICID",           "task": "CPD", "subtype": "Distribution-based", "color": "#56b567"},
+    "kcpd":       {"display": "KCPD",           "task": "CPD", "subtype": "Distribution-based", "color": "#a1d99b"},
+    "pelt":       {"display": "Pelt",           "task": "CPD", "subtype": "Distribution-based", "color": "#66c2a4"},
+    "prophet":    {"display": "Prophet",        "task": "CPD", "subtype": "Distribution-based", "color": "#99d8c9"},
+    "window":     {"display": "Window",         "task": "CPD", "subtype": "Distribution-based", "color": "#bae4b3"},
+
+    "clasp":      {"display": "CLaSP",          "task": "CPD", "subtype": "Subsequence-based",  "color": "#08519c"},
+    "espresso":   {"display": "ESPRESSO",       "task": "CPD", "subtype": "Subsequence-based",  "color": "#2171b5"},
+    "fluss":      {"display": "FLUSS",          "task": "CPD", "subtype": "Subsequence-based",  "color": "#4292c6"},
+    "igts":       {"display": "IGTS",           "task": "CPD", "subtype": "Subsequence-based",  "color": "#6baed6"},
+    "tglad":      {"display": "TGLAD",          "task": "CPD", "subtype": "Subsequence-based",  "color": "#084594"},
+    "tire":       {"display": "TiRE",           "task": "CPD", "subtype": "Subsequence-based",  "color": "#9ecae1"},
+    "tscp2":      {"display": "TSCP2",          "task": "CPD", "subtype": "Subsequence-based",  "color": "#c6dbef"},
+
+    "autoplait":  {"display": "AutoPlait",      "task": "SD",  "subtype": "Integrated",         "color": "#d94701"},
+    "ggs":        {"display": "GreedyGaussian", "task": "CPD", "subtype": "Distribution-based", "color": "#f16913"},
+    "hdp-hsmm":   {"display": "HdpHsmm",       "task": "SD",  "subtype": "Integrated",         "color": "#fd8d3c"},
+    "hidalgo":    {"display": "Hidalgo",        "task": "SD",  "subtype": "Integrated",         "color": "#fdae6b"},
+
+    "clap":       {"display": "CLaP",           "task": "SD",  "subtype": "Decomposed",         "color": "#7a0177"},
+    "e2usd":      {"display": "E2USD",          "task": "SD",  "subtype": "Decomposed",         "color": "#ae017e"},
+    "ticc":       {"display": "TICC",           "task": "SD",  "subtype": "Decomposed",         "color": "#dd3497"},
+    "time2state": {"display": "Time2State",     "task": "SD",  "subtype": "Decomposed",         "color": "#f768a1"},
+
+    "random":     {"display": "Random",         "task": "Baseline", "subtype": "Baseline",      "color": "#969696"},
+    "hdp-hsmm-legacy": {"display": "HdpHsmm-Legacy", "task": "SD", "subtype": "Integrated",    "color": "#fdd0a2"},
+    "patss":      {"display": "PatSS",          "task": "SD",  "subtype": "Decomposed",         "color": "#fa9fb5"},
+    "vsax":       {"display": "VSAX",           "task": "SD",  "subtype": "Decomposed",         "color": "#c994c7"}
+  },
+  "timeout_oom_algos": ["bocd", "dynp", "eagglo", "hidalgo", "kcpd", "tglad", "tscp2"]
+}

@@ -1,0 +1,187 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tsseg"
+version = "0.1.1"
+description = "A library for time series segmentation"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.10"
+license = {text = "AGPL-3.0-only"}
+authors = [
+    {name = "Anonymized Author", email = "anonymized.author@example.com"},
+]
+keywords = [
+    "time-series",
+    "segmentation",
+    "change-point",
+    "machine-learning",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "scipy",
+    "pooch",
+    "tqdm",
+    "joblib",
+    "statsmodels",
+    "future",
+]
+
+[project.optional-dependencies]
+torch = ["torch"]
+prophet = ["prophet"]
+# patss extra: requires manual install of npbad (not on PyPI)
+# pip install git+https://bitbucket.org/len_feremans/pbad_network.git
+patss = []
+# legacy-hsmm extra: requires manual install (not on PyPI)
+# pip install git+https://github.com/mattjj/pybasicbayes.git
+# pip install git+https://github.com/mattjj/pyhsmm.git
+legacy-hsmm = []
+accelerators = [
+    "numba",
+    "cython",
+]
+docs = [
+    "sphinx>=8.0",
+    "sphinx-rtd-theme>=2.0",
+    "myst-parser>=3.0",
+    "sphinx-autodoc-typehints>=2.2",
+]
+aeon = ["aeon"]
+tscp2 = [
+    "tensorflow>=2.16,<2.19",
+    "keras-tcn>=3.5.0,<3.6",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+    "black>=24.8",
+    "mypy>=1.10",
+    "build>=1.2",
+    "twine>=5.1",
+    "pre-commit>=3.7",
+]
+all = [
+    "tsseg[torch,prophet,accelerators,docs,aeon,tglad,tscp2]",
+]
+tglad = [
+    "torch>=2.0",
+    "networkx>=3.0",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["tsseg*"]
+exclude = ["tests*", "docs*", "examples*"]
+
+[tool.setuptools.package-data]
+"tsseg" = [
+    "**/*.json",
+    "**/*.yaml",
+    "**/*.yml",
+    "**/*.csv",
+    "**/*.mat",
+    "**/*.txt",
+]
+
+[tool.setuptools.exclude-package-data]
+"*" = [
+    "__pycache__/**",
+    "*.pyc",
+    "*.pyo",
+    "*.nbc",
+    "*.nbi",
+    "*.mlx",
+    "*.m",
+    "*.md",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+# Vendored / third-party code — not our responsibility to lint
+extend-exclude = [
+    "c/",
+    "tsseg/algorithms/tglad/vendor/",
+    "tsseg/algorithms/autoplait/deprecated/",
+    "tsseg/algorithms/bocd/old/",
+    "tsseg/algorithms/tire/old/",
+    "tsseg/algorithms/ruptures/",
+    "tsseg/algorithms/hdp_hsmm/",
+    "tsseg/algorithms/patss/",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "UP", # pyupgrade
+    "N",  # pep8-naming
+]
+ignore = [
+    "E501", # Line too long (handled by formatter)
+    "B008", # Do not perform function calls in argument defaults
+    "B028", # No explicit stacklevel (acceptable in internal warnings)
+    "N803", # Argument name should be lowercase (math notation often uses X)
+    "N806", # Variable in function should be lowercase (math notation often uses X, Y)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"] # Ignore unused imports in __init__ files
+"tsseg/algorithms/base.py" = ["N802"]              # _check_X, _convert_X
+"tsseg/algorithms/hidalgo/detector.py" = ["N802"]  # sample_Z
+"tsseg/algorithms/autoplait/*" = ["B905", "F821"]  # vendored code
+"tests/*" = ["N802", "B905"]                       # test names with X, zip in test utils
+# Vendored / third-party algorithm code — style issues only
+"tsseg/algorithms/clap/*" = ["E701", "E731", "E741", "B007", "B020", "F821", "N802"]
+"tsseg/algorithms/ticc/*" = ["E711", "E741", "F841", "N802", "B007", "UP030", "UP031"]
+"tsseg/algorithms/tire/*" = ["B007", "F821", "F841"]
+"tsseg/algorithms/espresso/*" = ["E701", "E722", "N999"]
+"tsseg/algorithms/e2usd/*" = ["E741", "N801", "UP008"]
+"tsseg/algorithms/time2state/*" = ["E741", "N801", "N816", "UP008"]
+"tsseg/algorithms/vqtss/*" = ["N812", "UP008"]
+"tsseg/algorithms/icid/*" = ["N802"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::FutureWarning",
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+check_untyped_defs = true
+disallow_untyped_defs = false # Start with false, aim for true later

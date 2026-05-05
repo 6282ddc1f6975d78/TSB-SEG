@@ -1,0 +1,35 @@
+# configs/hydra/launcher/submitit_gpu_available.yaml
+# ── SLURM launcher: first available GPU type on partition gpu ─────────
+# No GPU-type constraint: lets Slurm pick any free GPU to reduce waiting.
+#
+# Includes all GPU types (H200/H100/A100/RTX8000/RTX6000/V100/RTX2080Ti/GTX1080Ti).
+# Use this when throughput matters more than top-GPU preference.
+#
+# Conservative resources for older nodes:
+# - cpus_per_task: 6   (RTX2080Ti nodes provide 6 cpus/gpu)
+# - mem_gb: 20         (safe on all gpu nodes)
+#
+# Usage:
+#   python src/tsseg_exp/main.py hydra/launcher=submitit_gpu_available ...
+
+# @package hydra.launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 2880              # 2 days (gpu partition max)
+cpus_per_task: 6
+gpus_per_node: 1
+tasks_per_node: 1
+mem_gb: 20
+nodes: 1
+name: ${hydra.job.name}
+stderr_to_stdout: false
+
+partition: gpu
+signal_delay_s: 120
+max_num_timeout: 0
+additional_parameters: {}
+array_parallelism: 256
+
+setup:
+  - "export SLURM_CPU_BIND=none"

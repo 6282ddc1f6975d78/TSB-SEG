@@ -1,0 +1,30 @@
+# configs/hydra/launcher/submitit_gpu_h200.yaml
+# ── SLURM launcher targeting H200 GPUs (96 GB) ────────────────────────
+# Node gpu018: 4× H200, 32 cpus/gpu, partition gpu (max 2 days)
+# Priority partition: arches (gpu018)
+#
+# Usage:
+#   python src/tsseg_exp/main.py hydra/launcher=submitit_gpu_h200 ...
+
+# @package hydra.launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 2880              # 2 days (gpu partition max)
+cpus_per_task: 16
+gpus_per_node: 1
+tasks_per_node: 1
+mem_gb: 64
+nodes: 1
+name: ${hydra.job.name}
+stderr_to_stdout: false
+
+partition: gpu
+signal_delay_s: 120
+max_num_timeout: 0
+additional_parameters:
+  constraint: h200
+array_parallelism: 256
+
+setup:
+  - "export SLURM_CPU_BIND=none"

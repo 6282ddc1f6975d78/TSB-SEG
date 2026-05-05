@@ -1,0 +1,54 @@
+name: patss
+task: state
+
+instance:
+  _target_: tsseg.algorithms.patss.detector.PatssDetector
+
+  config:
+    workflow-type: algorithm_execution
+    n_jobs: 8
+    reraise_errors: true
+    do_logging: true
+    verbose: true
+    do_plotting: true
+
+    data: autoplait/21_01.txt
+
+    algorithm: patss
+
+    parameters:
+      pattern_mining:
+        _comment_segmentation: Parameters regarding the segmentation
+        resolution: -1
+        stride: 1
+        max_resolution_exponent: 10
+        _comment_sax: Parameters regarding sax
+        word_size: 16
+        alphabet_size: 3
+        binning_method: global
+        _comment_pattern_mining: Parameters regarding effective pattern mining
+        top_k_patterns: 25
+        min_pattern_size: 3
+        max_pattern_size: 10
+        duration: 1.2
+        do_mdl: 0
+
+      pattern_filter:
+        min_r_support: 0.0
+        max_r_support: 1.0
+        jaccard_similarity_threshold: 0.9
+        nb_largest_variance: 50
+        do_pca: 0
+
+      segmentation:
+        algorithm: logistic_regression
+        regularization: 0.1
+        n_clusters:
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9

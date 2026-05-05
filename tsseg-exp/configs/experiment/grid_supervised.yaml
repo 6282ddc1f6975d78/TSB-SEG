@@ -1,0 +1,7 @@
+# @package _global_
+name: "tsseg-experiment-grid-supervised-09-02"
+timeout_seconds: 86400    # 24 hours
+supervision_mode: "semi_supervised"
+pipeline:
+  name: grid_v2
+proportional_timeout: true

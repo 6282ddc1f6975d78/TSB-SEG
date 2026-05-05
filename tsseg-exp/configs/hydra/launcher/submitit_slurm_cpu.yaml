@@ -1,0 +1,35 @@
+# configs/hydra/launcher/submitit_slurm_cpu.yaml
+# ── SLURM launcher on CPU for TiRex experiments ──────────────────────
+#
+# TiRex can run on CPU (slower but no GPU quota limit).
+# Partition cpu_devel has ~35 nodes available, no QOSMaxGRES issue.
+#
+# Usage:
+#   python src/tsseg_exp/main.py hydra/launcher=submitit_slurm_cpu ...
+
+# @package hydra.launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+
+# ── BaseQueueConf defaults ─────────────────────
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 4320          # 3 days (CPU is ~5-10x slower than GPU)
+cpus_per_task: 16           # more CPU threads to compensate
+gpus_per_node: 0
+tasks_per_node: 1
+mem_gb: 32
+nodes: 1
+name: ${hydra.job.name}
+stderr_to_stdout: false
+
+# ── Slurm-specific ─────────────────────────────
+partition: cpu_devel
+signal_delay_s: 120
+max_num_timeout: 0
+additional_parameters: {}
+array_parallelism: 256
+
+setup:
+  - "export SLURM_CPU_BIND=none"
+  - "export OMP_NUM_THREADS=16"
+  - "export MKL_NUM_THREADS=16"
+  - "export CUDA_VISIBLE_DEVICES=''"

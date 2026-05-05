@@ -1,0 +1,20 @@
+name: fm-agglom-v4
+task: change_point
+
+instance:
+  _target_: tsseg_fm.detectors.FMAgglomCPD
+
+  distance_threshold: null
+  embed_window_size: 32
+  embed_stride: 16
+  layer: "mean"
+  pca_dim: null
+  n_change_points: null
+  model_name: "chronos"
+  device: null
+  axis: 0
+
+tunable_parameters:
+  - model_name: ["chronos", "mantis", "flowstate"]
+  - layer: ["0", "mean"]
+  - distance_threshold: [10.0, 20.0, 50.0]
